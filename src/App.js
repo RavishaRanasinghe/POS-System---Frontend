@@ -1,25 +1,45 @@
 import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
+import { useState } from 'react';
+import Home from './pages/Home';
+import Item from './pages/Item';
+
+import Category from './pages/Category';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; //to define pages
+import Categories from './pages/Categories';
+import Order from './pages/Order';
+import Register from './pages/Auth/Register';
+import Login from './pages/Auth/Login';
+import ProtectedRoute from './utils/ProtectedRoute';
+
 
 function App() {
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+            <BrowserRouter>
+            <Routes>
+              <Route element={<ProtectedRoute/>}>
+              <Route path= "/" element={<Home/>}/>
+              <Route path= "/item/:id" element={<Item/>}/>
+              <Route path= "/category" element={<Categories/>}/>
+              <Route path= "/category/:id" element={<Category/>}/>
+              <Route path="/order" element={<Order/>}/>
+              </Route>
+              
+
+            <Route path="/register" element={<Register/>}/>
+            <Route path="/login" element={<Login/>}/>
+
+            </Routes>
+            </BrowserRouter>
+
     </div>
   );
 }
+
+
 
 export default App;
